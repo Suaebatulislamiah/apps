@@ -2,8 +2,20 @@
 
 use Illuminate\Support\Facades\Route;
 
+ use App\Http\Controllers\PostController;
+
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+// Halaman statis
+Route::get('/biodata', function () {
+    return view('biodata');
+});
+
+Route::get('/namasaya', function () {
+    echo "Suaebatul";
 });
 
 // 1. Routing 1 parameter
@@ -30,3 +42,6 @@ Route::get('/user/{id}', function ($id) {
 Route::get('/user/{id}', function ($id) {
     return "Tampilkan user dengan id = $id";
 })->where('id', '^[A-Za-z]{2}[0-9]+$');
+
+// Resource controller untuk Post
+Route::resource('posts', PostController::class);

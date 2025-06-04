@@ -1,12 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\GreetingController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\UjianController;
+use App\Http\Controllers\HomeController;
 
- use App\Http\Controllers\PostController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 // Halaman statis
@@ -43,5 +50,26 @@ Route::get('/user/{id}', function ($id) {
     return "Tampilkan user dengan id = $id";
 })->where('id', '^[A-Za-z]{2}[0-9]+$');
 
+
 // Resource controller untuk Post
 Route::resource('posts', PostController::class);
+
+Route::resource('products', ProductController::class);
+
+// Resource controller untuk Order
+Route::resource('orders', OrderController::class);
+
+// Route untuk halaman greeting
+Route::get('/greeting', [GreetingController::class, 'greeting']);
+
+// Route untuk halaman daftar siswa
+Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
+
+// Route untuk halaman profil
+Route::get('/profil', [ProfilController::class, 'show'])->name('profil');
+
+// Route untuk halaman hasil ujian 
+Route::get('/hasil-ujian', [UjianController::class, 'hasil'])->name('hasil_ujian.index');
+
+// Route untuk halaman home
+Route::get('/home', [HomeController::class, 'index'])->name('home');
